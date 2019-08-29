@@ -25,11 +25,11 @@ def build_dataset(config):
 
                 if pad_size:
                     if len(token) < pad_size:
-                        mask = [1] * len(token_ids) + [0] * (pad_size - len(token))
-                        token_ids += ([0] * (pad_size - len(token)))
+                        mask = [1] * len(token_ids) + [0] * (pad_size - len(token))  # mask paddle长度, 数值全部为1, 不足部分全部为0
+                        token_ids += ([0] * (pad_size - len(token)))                 # 不足paddle长度的补齐, 结果为paddle 长度list
                     else:
-                        mask = [1] * pad_size
-                        token_ids = token_ids[:pad_size]
+                        mask = [1] * pad_size                                        # mask 长度为paddle长度, 数值全部为1
+                        token_ids = token_ids[:pad_size]                             # 超过paddle 长度的截断
                         seq_len = pad_size
                 contents.append((token_ids, int(label), seq_len, mask))
         return contents
