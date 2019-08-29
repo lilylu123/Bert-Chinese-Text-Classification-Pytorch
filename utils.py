@@ -31,7 +31,7 @@ def build_dataset(config):
                         mask = [1] * pad_size                                        # mask 长度为paddle长度, 数值全部为1
                         token_ids = token_ids[:pad_size]                             # 超过paddle 长度的截断
                         seq_len = pad_size
-                contents.append((token_ids, int(label), seq_len, mask))
+                contents.append((token_ids, int(label), seq_len, mask))              # train 中的内容：((token_ids(list), label(class label)),seq_len(old token length),mask(list))
         return contents
     train = load_dataset(config.train_path, config.pad_size)
     dev = load_dataset(config.dev_path, config.pad_size)
